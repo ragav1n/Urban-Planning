@@ -21,7 +21,7 @@ export default function DashboardSidebar() {
   const menuItems = [
     { icon: FileText, label: "Compliance Reports", href: "/dashboard/reports" },
     { icon: Upload, label: "Grievance Uploading", href: "/dashboard/grievance" },
-    { icon: Scale, label: "Regulation Checker", href: "/dashboard/regulations" },
+    { icon: Scale, label: "Redevelopment", href: "/dashboard/redevelopment" },
     { icon: Map, label: "Optimal Zoning", href: "/dashboard/zoning" },
   ]
 

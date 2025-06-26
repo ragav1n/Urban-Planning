@@ -3,11 +3,21 @@
 import { useAuth } from "@/hooks/use-auth"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
-import { BarChart, LogOut, FileText, AlertTriangle, CheckCircle, Clock, TrendingUp, Plus, Eye } from "lucide-react"
+import {
+  BarChart,
+  LogOut,
+  FileText,
+  AlertTriangle,
+  CheckCircle,
+  Clock,
+  TrendingUp,
+  Plus,
+  Eye,
+  Camera,
+} from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
 
 interface ComplianceReport {
@@ -44,11 +54,26 @@ interface ComplianceReport {
   updated_at: string
 }
 
+interface Grievance {
+  id: string
+  user_id: string
+  image_url: string
+  description: string | null
+  pin_code: string
+  date_observed: string
+  category: string
+  status: string
+  created_at: string
+  updated_at: string
+}
+
 export default function Dashboard() {
   const { user, loading, signOut } = useAuth()
   const router = useRouter()
   const [reports, setReports] = useState<ComplianceReport[]>([])
+  const [grievances, setGrievances] = useState<Grievance[]>([])
   const [loadingReports, setLoadingReports] = useState(true)
+  const [loadingGrievances, setLoadingGrievances] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
@@ -60,6 +85,7 @@ export default function Dashboard() {
   useEffect(() => {
     if (user) {
       fetchReports()
+      fetchGrievances()
     }
   }, [user])
 
@@ -90,6 +116,33 @@ export default function Dashboard() {
       setError("Failed to connect to database")
     } finally {
       setLoadingReports(false)
+    }
+  }
+
+  const fetchGrievances = async () => {
+    try {
+      setLoadingGrievances(true)
+
+      const supabase = createClientComponentClient()
+
+      console.log("Fetching grievances for user:", user?.id)
+
+      const { data: grievances, error } = await supabase
+        .from("grievances")
+        .select("*")
+        .eq("user_id", user?.id)
+        .order("created_at", { ascending: false })
+
+      if (error) {
+        console.error("Error fetching grievances:", error)
+      } else {
+        console.log("Fetched grievances:", grievances?.length || 0)
+        setGrievances(grievances || [])
+      }
+    } catch (error) {
+      console.error("Unexpected error fetching grievances:", error)
+    } finally {
+      setLoadingGrievances(false)
     }
   }
 
@@ -128,6 +181,32 @@ export default function Dashboard() {
     }
   }
 
+  const getGrievanceStatusColor = (status: string) => {
+    switch (status?.toLowerCase()) {
+      case "resolved":
+        return "bg-green-900/30 text-green-400"
+      case "in_progress":
+        return "bg-blue-900/30 text-blue-400"
+      case "rejected":
+        return "bg-red-900/30 text-red-400"
+      default:
+        return "bg-yellow-900/30 text-yellow-400"
+    }
+  }
+
+  const getGrievanceIcon = (status: string) => {
+    switch (status?.toLowerCase()) {
+      case "resolved":
+        return <CheckCircle className="h-4 w-4 text-green-500" />
+      case "in_progress":
+        return <Clock className="h-4 w-4 text-blue-500" />
+      case "rejected":
+        return <AlertTriangle className="h-4 w-4 text-red-500" />
+      default:
+        return <Clock className="h-4 w-4 text-yellow-500" />
+    }
+  }
+
   const calculateComplianceScore = (report: ComplianceReport) => {
     const violationCount = Array.isArray(report.violations) ? report.violations.length : 0
     const recommendationCount = Array.isArray(report.recommendations) ? report.recommendations.length : 0
@@ -151,6 +230,7 @@ export default function Dashboard() {
   }
 
   const latestReport = reports.length > 0 ? reports[0] : null
+  const latestGrievance = grievances.length > 0 ? grievances[0] : null
 
   if (loading) {
     return (
@@ -196,141 +276,169 @@ export default function Dashboard() {
       )}
 
       {/* Loading State */}
-      {loadingReports && (
+      {(loadingReports || loadingGrievances) && (
         <Card className="mb-8">
           <CardContent className="p-8 text-center">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-500 mx-auto mb-4"></div>
-            <p className="text-gray-400">Loading your reports...</p>
+            <p className="text-gray-400">Loading your data...</p>
           </CardContent>
         </Card>
       )}
 
-      {/* Latest Compliance Report Status */}
-      {!loadingReports && latestReport ? (
-        <Card className="mb-8 border-l-4 border-l-purple-500">
-          <CardHeader>
-            <div className="flex items-center justify-between">
-              <CardTitle className="text-lg text-white flex items-center gap-2">
-                <FileText className="h-5 w-5" />
-                Latest Compliance Report
-              </CardTitle>
-              <Badge variant="outline" className="text-xs">
-                {formatDate(latestReport.created_at)}
-              </Badge>
-            </div>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {/* Overall Status */}
-              <div className="space-y-3">
+      {/* Latest Activities Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+        {/* Latest Compliance Report */}
+        {!loadingReports && latestReport ? (
+          <Card className="border-l-4 border-l-purple-500">
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-lg text-white flex items-center gap-2">
+                  <FileText className="h-5 w-5" />
+                  Latest Compliance Report
+                </CardTitle>
+                <Badge variant="outline" className="text-xs">
+                  {formatDate(latestReport.created_at)}
+                </Badge>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
                 <div className="flex items-center gap-2">
                   {getComplianceIcon(latestReport.status)}
                   <span className={`font-semibold ${getComplianceColor(latestReport.status)}`}>
                     {latestReport.status?.toUpperCase() || "PENDING"}
                   </span>
                 </div>
+
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-400">Compliance Score</span>
-                    <span className="text-white">{calculateComplianceScore(latestReport)}%</span>
-                  </div>
-                  <Progress value={calculateComplianceScore(latestReport)} className="h-2" />
-                </div>
-              </div>
-
-              {/* Project Details */}
-              <div className="space-y-2">
-                <h4 className="font-medium text-white">Project Details</h4>
-                <div className="space-y-1 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-gray-400">Project Name:</span>
+                    <span className="text-gray-400">Project:</span>
                     <span className="text-white">{latestReport.project_name}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-400">Report ID:</span>
-                    <span className="text-white">{latestReport.report_id}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-400">Building Type:</span>
-                    <span className="text-white capitalize">{latestReport.proposed_use}</span>
-                  </div>
-                  <div className="flex justify-between">
+                  <div className="flex justify-between text-sm">
                     <span className="text-gray-400">Zone:</span>
                     <span className="text-white">{latestReport.zone_type}</span>
                   </div>
-                </div>
-              </div>
-
-              {/* Compliance Summary */}
-              <div className="space-y-2">
-                <h4 className="font-medium text-white">Compliance Summary</h4>
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between text-sm">
-                    <div className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 text-green-500" />
-                      <span className="text-gray-400">Plot Area</span>
-                    </div>
-                    <span className="text-white">{latestReport.plot_area.toFixed(1)} sq.m</span>
-                  </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <div className="flex items-center gap-2">
-                      <AlertTriangle className="h-4 w-4 text-yellow-500" />
-                      <span className="text-gray-400">Recommendations</span>
-                    </div>
-                    <span className="text-yellow-500 font-medium">
-                      {Array.isArray(latestReport.recommendations) ? latestReport.recommendations.length : 0}
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <div className="flex items-center gap-2">
-                      <AlertTriangle className="h-4 w-4 text-red-500" />
-                      <span className="text-gray-400">Violations</span>
-                    </div>
-                    <span className="text-red-500 font-medium">
-                      {Array.isArray(latestReport.violations) ? latestReport.violations.length : 0}
-                    </span>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-400">Compliance Score:</span>
+                    <span className="text-white">{calculateComplianceScore(latestReport)}%</span>
                   </div>
                 </div>
-              </div>
-            </div>
 
-            {/* Action Button */}
-            <div className="mt-4 pt-4 border-t border-gray-700">
-              <Button
-                onClick={() => handleViewReport(latestReport.report_id)}
-                variant="outline"
-                size="sm"
-                className="w-full"
-              >
-                <Eye className="mr-2 h-4 w-4" />
-                View Full Report
+                <Button
+                  onClick={() => handleViewReport(latestReport.report_id)}
+                  variant="outline"
+                  size="sm"
+                  className="w-full"
+                >
+                  <Eye className="mr-2 h-4 w-4" />
+                  View Full Report
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        ) : !loadingReports ? (
+          <Card className="border-l-4 border-l-gray-500">
+            <CardHeader>
+              <CardTitle className="text-lg text-white flex items-center gap-2">
+                <FileText className="h-5 w-5" />
+                No Compliance Reports Yet
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-gray-400 mb-4">Generate your first compliance report to see detailed analysis.</p>
+              <Button onClick={handleGenerateReport} className="w-full">
+                <Plus className="mr-2 h-4 w-4" />
+                Generate First Report
               </Button>
-            </div>
-          </CardContent>
-        </Card>
-      ) : !loadingReports ? (
-        <Card className="mb-8 border-l-4 border-l-gray-500">
-          <CardHeader>
-            <CardTitle className="text-lg text-white flex items-center gap-2">
-              <FileText className="h-5 w-5" />
-              No Compliance Reports Yet
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-gray-400 mb-4">
-              Generate your first compliance report to see detailed analysis and compliance status.
-            </p>
-            <Button onClick={handleGenerateReport} className="w-full">
-              <Plus className="mr-2 h-4 w-4" />
-              Generate First Report
-            </Button>
-          </CardContent>
-        </Card>
-      ) : null}
+            </CardContent>
+          </Card>
+        ) : null}
+
+        {/* Latest Grievance */}
+        {!loadingGrievances && latestGrievance ? (
+          <Card className="border-l-4 border-l-orange-500">
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-lg text-white flex items-center gap-2">
+                  <Camera className="h-5 w-5" />
+                  Latest Grievance
+                </CardTitle>
+                <Badge variant="outline" className="text-xs">
+                  {formatDate(latestGrievance.created_at)}
+                </Badge>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div className="flex items-center gap-2">
+                  {getGrievanceIcon(latestGrievance.status)}
+                  <span
+                    className={`px-3 py-1 rounded-full text-xs font-medium ${getGrievanceStatusColor(latestGrievance.status)}`}
+                  >
+                    {latestGrievance.status.replace("_", " ").toUpperCase()}
+                  </span>
+                </div>
+
+                <div className="space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-400">Category:</span>
+                    <span className="text-white">{latestGrievance.category}</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-400">Pin Code:</span>
+                    <span className="text-white">{latestGrievance.pin_code}</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-400">Date Observed:</span>
+                    <span className="text-white">{new Date(latestGrievance.date_observed).toLocaleDateString()}</span>
+                  </div>
+                </div>
+
+                {latestGrievance.image_url && (
+                  <div className="mt-3">
+                    <img
+                      src={latestGrievance.image_url || "/placeholder.svg"}
+                      alt="Grievance"
+                      className="w-full h-32 object-cover rounded-md"
+                    />
+                  </div>
+                )}
+
+                <Button
+                  onClick={() => router.push("/dashboard/grievance")}
+                  variant="outline"
+                  size="sm"
+                  className="w-full"
+                >
+                  <Eye className="mr-2 h-4 w-4" />
+                  View All Grievances
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        ) : !loadingGrievances ? (
+          <Card className="border-l-4 border-l-gray-500">
+            <CardHeader>
+              <CardTitle className="text-lg text-white flex items-center gap-2">
+                <Camera className="h-5 w-5" />
+                No Grievances Yet
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-gray-400 mb-4">Submit your first grievance to report issues in your area.</p>
+              <Button onClick={() => router.push("/dashboard/grievance")} className="w-full">
+                <Plus className="mr-2 h-4 w-4" />
+                Submit First Grievance
+              </Button>
+            </CardContent>
+          </Card>
+        ) : null}
+      </div>
 
       {/* Stats Cards */}
-      {!loadingReports && (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      {!loadingReports && !loadingGrievances && (
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <div className="card flex items-center p-6">
             <div className="bg-purple-900/20 p-4 rounded-full mr-4">
               <FileText className="h-8 w-8 text-purple-500" />
@@ -345,8 +453,21 @@ export default function Dashboard() {
           </div>
 
           <div className="card flex items-center p-6">
-            <div className="bg-purple-900/20 p-4 rounded-full mr-4">
-              <TrendingUp className="h-8 w-8 text-purple-500" />
+            <div className="bg-orange-900/20 p-4 rounded-full mr-4">
+              <Camera className="h-8 w-8 text-orange-500" />
+            </div>
+            <div className="flex-1">
+              <p className="text-gray-400">Grievances Submitted</p>
+              <p className="text-3xl font-bold">{grievances.length}</p>
+              <p className="text-xs text-gray-500 mt-1">
+                {latestGrievance ? `Latest: ${formatDate(latestGrievance.created_at)}` : "No grievances yet"}
+              </p>
+            </div>
+          </div>
+
+          <div className="card flex items-center p-6">
+            <div className="bg-green-900/20 p-4 rounded-full mr-4">
+              <TrendingUp className="h-8 w-8 text-green-500" />
             </div>
             <div className="flex-1">
               <p className="text-gray-400">Compliance Score</p>
@@ -360,18 +481,16 @@ export default function Dashboard() {
           </div>
 
           <div className="card flex items-center p-6">
-            <div className="bg-purple-900/20 p-4 rounded-full mr-4">
-              <BarChart className="h-8 w-8 text-purple-500" />
+            <div className="bg-blue-900/20 p-4 rounded-full mr-4">
+              <BarChart className="h-8 w-8 text-blue-500" />
             </div>
             <div className="flex-1">
-              <p className="text-gray-400">Total Violations</p>
-              <p className="text-3xl font-bold">
-                {latestReport ? (Array.isArray(latestReport.violations) ? latestReport.violations.length : 0) : "0"}
-              </p>
+              <p className="text-gray-400">Resolved Grievances</p>
+              <p className="text-3xl font-bold">{grievances.filter((g) => g.status === "resolved").length}</p>
               <p className="text-xs text-gray-500 mt-1">
-                {latestReport && Array.isArray(latestReport.recommendations) && latestReport.recommendations.length > 0
-                  ? `${latestReport.recommendations.length} recommendations`
-                  : "No issues found"}
+                {grievances.length > 0
+                  ? `${Math.round((grievances.filter((g) => g.status === "resolved").length / grievances.length) * 100)}% resolution rate`
+                  : "No grievances yet"}
               </p>
             </div>
           </div>
@@ -429,47 +548,75 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/* Recent Reports */}
-          {!loadingReports && reports.length > 0 && (
-            <div className="card p-6">
-              <h2 className="text-xl font-bold mb-4">Recent Reports</h2>
-              <div className="space-y-4">
-                {reports.slice(0, 5).map((report, index) => (
-                  <div
-                    key={report.id}
-                    className="flex justify-between items-center p-4 bg-gray-800 rounded-md hover:bg-gray-700 transition-colors cursor-pointer"
-                    onClick={() => handleViewReport(report.report_id)}
-                  >
+          {/* Recent Activities */}
+          <div className="card p-6">
+            <h2 className="text-xl font-bold mb-4">Recent Activities</h2>
+            <div className="space-y-4">
+              {/* Recent Reports */}
+              {reports.slice(0, 3).map((report, index) => (
+                <div
+                  key={`report-${report.id}`}
+                  className="flex justify-between items-center p-4 bg-gray-800 rounded-md hover:bg-gray-700 transition-colors cursor-pointer"
+                  onClick={() => handleViewReport(report.report_id)}
+                >
+                  <div className="flex items-center gap-3">
+                    <FileText className="h-5 w-5 text-purple-500" />
                     <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1">
-                        {getComplianceIcon(report.status)}
-                        <p className="font-medium">{report.project_name}</p>
-                      </div>
-                      <p className="text-sm text-gray-400">
-                        {report.proposed_use} • {report.zone_type} • {report.num_floors}
-                      </p>
+                      <p className="font-medium">{report.project_name}</p>
+                      <p className="text-sm text-gray-400">Compliance Report • {report.zone_type}</p>
                       <p className="text-xs text-gray-500">{formatDate(report.created_at)}</p>
                     </div>
-                    <div className="text-right">
-                      <span
-                        className={`px-3 py-1 rounded-full text-xs font-medium ${
-                          report.status === "compliant"
-                            ? "bg-green-900/30 text-green-400"
-                            : report.status === "non-compliant"
-                              ? "bg-red-900/30 text-red-400"
-                              : "bg-yellow-900/30 text-yellow-400"
-                        }`}
-                      >
-                        {report.status}
-                      </span>
-                      <p className="text-xs text-gray-400 mt-1">Score: {calculateComplianceScore(report)}%</p>
-                      <Eye className="h-4 w-4 text-gray-400 mt-1 ml-auto" />
+                  </div>
+                  <div className="text-right">
+                    <span
+                      className={`px-3 py-1 rounded-full text-xs font-medium ${
+                        report.status === "compliant"
+                          ? "bg-green-900/30 text-green-400"
+                          : report.status === "non-compliant"
+                            ? "bg-red-900/30 text-red-400"
+                            : "bg-yellow-900/30 text-yellow-400"
+                      }`}
+                    >
+                      {report.status}
+                    </span>
+                    <Eye className="h-4 w-4 text-gray-400 mt-1 ml-auto" />
+                  </div>
+                </div>
+              ))}
+
+              {/* Recent Grievances */}
+              {grievances.slice(0, 3).map((grievance, index) => (
+                <div
+                  key={`grievance-${grievance.id}`}
+                  className="flex justify-between items-center p-4 bg-gray-800 rounded-md hover:bg-gray-700 transition-colors cursor-pointer"
+                  onClick={() => router.push("/dashboard/grievance")}
+                >
+                  <div className="flex items-center gap-3">
+                    <Camera className="h-5 w-5 text-orange-500" />
+                    <div className="flex-1">
+                      <p className="font-medium">{grievance.category}</p>
+                      <p className="text-sm text-gray-400">Grievance • Pin: {grievance.pin_code}</p>
+                      <p className="text-xs text-gray-500">{formatDate(grievance.created_at)}</p>
                     </div>
                   </div>
-                ))}
-              </div>
+                  <div className="text-right">
+                    <span
+                      className={`px-3 py-1 rounded-full text-xs font-medium ${getGrievanceStatusColor(grievance.status)}`}
+                    >
+                      {grievance.status.replace("_", " ")}
+                    </span>
+                    <Eye className="h-4 w-4 text-gray-400 mt-1 ml-auto" />
+                  </div>
+                </div>
+              ))}
+
+              {reports.length === 0 && grievances.length === 0 && (
+                <div className="text-center py-8 text-gray-400">
+                  <p>No recent activities. Start by generating a compliance report or submitting a grievance.</p>
+                </div>
+              )}
             </div>
-          )}
+          </div>
         </div>
 
         <div>
