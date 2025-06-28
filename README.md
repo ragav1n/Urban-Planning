@@ -61,6 +61,8 @@ This is an integrated, intelligent platform for **urban regulation compliance**,
   - Comprehensive redevelopment reports with timeline and budget estimates
   - Community impact assessments and stakeholder engagement metrics
 
+---
+
 ### 5️⃣ **User-Facing Web Application**
 - 🖥️ Built using **Next.js 14 + TypeScript**
 - 🎨 Styled with **Tailwind CSS**
