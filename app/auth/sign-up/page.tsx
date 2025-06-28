@@ -76,15 +76,34 @@ export default function SignUp() {
 
       console.log("User created successfully:", data.user?.id)
 
-      // Verify profile was created
+      // Update profile with email and name after user creation
       if (data.user) {
-        const { data: profile, error: profileError } = await supabase
+        try {
+          const { error: profileError } = await supabase.from("profiles").upsert({
+            id: data.user.id,
+            name: values.name,
+            email: values.email,
+            updated_at: new Date().toISOString(),
+          })
+
+          if (profileError) {
+            console.error("Profile update error:", profileError)
+          } else {
+            console.log("Profile updated successfully with email")
+          }
+        } catch (profileErr) {
+          console.error("Profile update failed:", profileErr)
+          // Don't throw here since user is already created
+        }
+
+        // Verify profile was created/updated
+        const { data: profile, error: profileCheckError } = await supabase
           .from("profiles")
           .select("*")
           .eq("id", data.user.id)
           .single()
 
-        console.log("Profile check:", { profile, profileError })
+        console.log("Profile check:", { profile, profileCheckError })
       }
 
       setSuccess(true)

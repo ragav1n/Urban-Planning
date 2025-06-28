@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bangalore Ward Reservation Map - UrbanPlan</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .header {
+            background: rgba(30, 41, 59, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header h1 {
+            color: #a855f7;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .controls {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .view-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .view-btn {
+            padding: 0.75rem 1.5rem;
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            border-radius: 8px;
+            background: rgba(51, 65, 85, 0.5);
+            color: #e2e8f0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .view-btn:hover {
+            background: rgba(168, 85, 247, 0.2);
+            border-color: #a855f7;
+            transform: translateY(-2px);
+        }
+        
+        .view-btn.active {
+            background: #a855f7;
+            border-color: #a855f7;
+            color: white;
+        }
+        
+        .legend {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+        }
+        
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .legend-pattern {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255,255,255,0.3) 2px, rgba(255,255,255,0.3) 4px);
+        }
+        
+        .map-container {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .map-svg {
+            width: 100%;
+            height: 600px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+        
+        .ward {
+            stroke: rgba(148, 163, 184, 0.4);
+            stroke-width: 1;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .ward:hover {
+            stroke: #a855f7;
+            stroke-width: 2;
+            filter: brightness(1.2);
+        }
+        
+        .ward.selected {
+            stroke: #fbbf24;
+            stroke-width: 3;
+            filter: brightness(1.3);
+        }
+        
+        .ward.reserved {
+            stroke-dasharray: 5,5;
+            stroke-width: 2;
+        }
+        
+        .tooltip {
+            position: absolute;
+            background: rgba(15, 23, 42, 0.95);
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            pointer-events: none;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            max-width: 280px;
+        }
+        
+        .tooltip.visible {
+            opacity: 1;
+        }
+        
+        .tooltip h3 {
+            color: #a855f7;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tooltip-stat {
+            display: flex;
+            justify-content: space-between;
+            margin: 0.25rem 0;
+            font-size: 0.85rem;
+        }
+        
+        .tooltip-label {
+            color: #94a3b8;
+        }
+        
+        .tooltip-value {
+            color: #e2e8f0;
+            font-weight: 500;
+        }
+        
+        .reservation-badge {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+        
+        .stats-panel {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            min-width: 220px;
+        }
+        
+        .stats-title {
+            color: #a855f7;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+        }
+        
+        .stat-label {
+            color: #94a3b8;
+        }
+        
+        .stat-value {
+            color: #e2e8f0;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .view-buttons {
+                flex-direction: column;
+            }
+            
+            .legend {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .stats-panel {
+                position: static;
+                margin-top: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🏛️ Bangalore Ward Reservation Map</h1>
+        <p>Interactive visualization of reservation categories and demographics across Bangalore wards</p>
+    </div>
+
+    <div class="container">
+        <div class="controls">
+            <div class="view-buttons">
+                <button class="view-btn active" onclick="setView('reservation')">Reservation View</button>
+                <button class="view-btn" onclick="setView('demographics')">Demographics View</button>
+                <button class="view-btn" onclick="setView('distribution')">Distribution View</button>
+            </div>
+            
+            <div class="legend" id="legend">
+                <!-- Legend items will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <div class="map-container">
+            <svg class="map-svg" id="mapSvg" viewBox="0 0 800 600">
+                <!-- Ward paths will be generated by JavaScript -->
+            </svg>
+            
+            <div class="stats-panel">
+                <div class="stats-title">Reservation Stats</div>
+                <div class="stat-item">
+                    <span class="stat-label">Total Wards:</span>
+                    <span class="stat-value" id="totalWards">198</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">General:</span>
+                    <span class="stat-value" id="generalCount">89</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">SC Reserved:</span>
+                    <span class="stat-value" id="scCount">45</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">ST Reserved:</span>
+                    <span class="stat-value" id="stCount">12</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">OBC Reserved:</span>
+                    <span class="stat-value" id="obcCount">32</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Women Reserved:</span>
+                    <span class="stat-value" id="womenCount">20</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Selected Ward:</span>
+                    <span class="stat-value" id="selectedWard">None</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tooltip" id="tooltip">
+        <h3 id="tooltipTitle"></h3>
+        <div id="tooltipContent"></div>
+    </div>
+
+    <script>
+        // Sample ward data with reservation information
+        const wardData = [
+            { id: 1, name: "Yelahanka", reservation: "General", scPop: 15, stPop: 5, obcPop: 25, generalPop: 55, x: 100, y: 50 },
+            { id: 2, name: "Hebbal", reservation: "SC", scPop: 35, stPop: 8, obcPop: 22, generalPop: 35, x: 150, y: 80 },
+            { id: 3, name: "RT Nagar", reservation: "Women", scPop: 18, stPop: 3, obcPop: 28, generalPop: 51, x: 200, y: 100 },
+            { id: 4, name: "Malleshwaram", reservation: "General", scPop: 12, stPop: 2, obcPop: 20, generalPop: 66, x: 180, y: 150 },
+            { id: 5, name: "Rajajinagar", reservation: "OBC", scPop: 20, stPop: 6, obcPop: 38, generalPop: 36, x: 120, y: 180 },
+            { id: 6, name: "Basavanagudi", reservation: "SC", scPop: 32, stPop: 4, obcPop: 24, generalPop: 40, x: 200, y: 220 },
+            { id: 7, name: "Jayanagar", reservation: "General", scPop: 14, stPop: 3, obcPop: 23, generalPop: 60, x: 250, y: 250 },
+            { id: 8, name: "BTM Layout", reservation: "Women", scPop: 16, stPop: 4, obcPop: 26, generalPop: 54, x: 300, y: 280 },
+            { id: 9, name: "Koramangala", reservation: "General", scPop: 10, stPop: 2, obcPop: 18, generalPop: 70, x: 350, y: 300 },
+            { id: 10, name: "Indiranagar", reservation: "SC", scPop: 28, stPop: 5, obcPop: 27, generalPop: 40, x: 400, y: 200 },
+            { id: 11, name: "Whitefield", reservation: "General", scPop: 13, stPop: 3, obcPop: 22, generalPop: 62, x: 500, y: 180 },
+            { id: 12, name: "Marathahalli", reservation: "OBC", scPop: 17, stPop: 7, obcPop: 42, generalPop: 34, x: 450, y: 220 },
+            { id: 13, name: "HSR Layout", reservation: "Women", scPop: 15, stPop: 4, obcPop: 25, generalPop: 56, x: 380, y: 350 },
+            { id: 14, name: "Electronic City", reservation: "ST", scPop: 22, stPop: 45, obcPop: 18, generalPop: 15, x: 320, y: 450 },
+            { id: 15, name: "Banashankari", reservation: "SC", scPop: 38, stPop: 6, obcPop: 26, generalPop: 30, x: 180, y: 320 },
+            { id: 16, name: "Vijayanagar", reservation: "General", scPop: 16, stPop: 4, obcPop: 24, generalPop: 56, x: 80, y: 220 },
+            { id: 17, name: "Nagarbhavi", reservation: "OBC", scPop: 19, stPop: 8, obcPop: 40, generalPop: 33, x: 50, y: 280 },
+            { id: 18, name: "Kengeri", reservation: "ST", scPop: 25, stPop: 42, obcPop: 20, generalPop: 13, x: 80, y: 380 },
+            { id: 19, name: "Bommanahalli", reservation: "Women", scPop: 17, stPop: 5, obcPop: 28, generalPop: 50, x: 280, y: 380 },
+            { id: 20, name: "Sarjapur", reservation: "General", scPop: 14, stPop: 3, obcPop: 21, generalPop: 62, x: 420, y: 400 }
+        ];
+
+        let currentView = 'reservation';
+        let selectedWard = null;
+
+        function generateWardPath(ward, index) {
+            const centerX = ward.x;
+            const centerY = ward.y;
+            const size = 25 + Math.random() * 15;
+            
+            const points = [];
+            const numPoints = 6 + Math.floor(Math.random() * 4);
+            
+            for (let i = 0; i < numPoints; i++) {
+                const angle = (i / numPoints) * 2 * Math.PI;
+                const radius = size * (0.7 + Math.random() * 0.6);
+                const x = centerX + Math.cos(angle) * radius;
+                const y = centerY + Math.sin(angle) * radius;
+                points.push(`${x},${y}`);
+            }
+            
+            return `M ${points.join(' L ')} Z`;
+        }
+
+        function getColorForReservation(reservation) {
+            const colors = {
+                'General': '#6b7280',      // Gray
+                'SC': '#ef4444',           // Red
+                'ST': '#f97316',           // Orange
+                'OBC': '#eab308',          // Yellow
+                'Women': '#a855f7'         // Purple
+            };
+            return colors[reservation] || '#6b7280';
+        }
+
+        function getColorForDemographics(ward) {
+            const dominant = getDominantCategory(ward);
+            const colors = {
+                'SC': '#ef4444',
+                'ST': '#f97316', 
+                'OBC': '#eab308',
+                'General': '#6b7280'
+            };
+            return colors[dominant] || '#6b7280';
+        }
+
+        function getColorForDistribution(ward) {
+            const diversity = calculateDiversity(ward);
+            if (diversity > 0.7) return '#10b981'; // High diversity - Green
+            if (diversity > 0.5) return '#3b82f6'; // Medium diversity - Blue
+            return '#8b5cf6'; // Low diversity - Purple
+        }
+
+        function getDominantCategory(ward) {
+            const categories = {
+                'SC': ward.scPop,
+                'ST': ward.stPop,
+                'OBC': ward.obcPop,
+                'General': ward.generalPop
+            };
+            
+            return Object.keys(categories).reduce((a, b) => 
+                categories[a] > categories[b] ? a : b
+            );
+        }
+
+        function calculateDiversity(ward) {
+            const total = ward.scPop + ward.stPop + ward.obcPop + ward.generalPop;
+            const proportions = [
+                ward.scPop / total,
+                ward.stPop / total,
+                ward.obcPop / total,
+                ward.generalPop / total
+            ];
+            
+            // Shannon diversity index
+            return -proportions.reduce((sum, p) => 
+                p > 0 ? sum + p * Math.log(p) : sum, 0
+            ) / Math.log(4);
+        }
+
+        function updateLegend() {
+            const legend = document.getElementById('legend');
+            let legendItems = [];
+            
+            if (currentView === 'reservation') {
+                legendItems = [
+                    { color: '#6b7280', label: 'General', type: 'color' },
+                    { color: '#ef4444', label: 'SC Reserved', type: 'color' },
+                    { color: '#f97316', label: 'ST Reserved', type: 'color' },
+                    { color: '#eab308', label: 'OBC Reserved', type: 'color' },
+                    { color: '#a855f7', label: 'Women Reserved', type: 'color' }
+                ];
+            } else if (currentView === 'demographics') {
+                legendItems = [
+                    { color: '#6b7280', label: 'General Majority', type: 'color' },
+                    { color: '#ef4444', label: 'SC Majority', type: 'color' },
+                    { color: '#f97316', label: 'ST Majority', type: 'color' },
+                    { color: '#eab308', label: 'OBC Majority', type: 'color' },
+                    { color: 'pattern', label: 'Reserved Ward', type: 'pattern' }
+                ];
+            } else {
+                legendItems = [
+                    { color: '#8b5cf6', label: 'Low Diversity', type: 'color' },
+                    { color: '#3b82f6', label: 'Medium Diversity', type: 'color' },
+                    { color: '#10b981', label: 'High Diversity', type: 'color' }
+                ];
+            }
+            
+            legend.innerHTML = legendItems.map(item => `
+                <div class="legend-item">
+                    <div class="legend-${item.type}" style="${item.type === 'color' ? `background-color: ${item.color}` : ''}"></div>
+                    <span>${item.label}</span>
+                </div>
+            `).join('');
+        }
+
+        function renderMap() {
+            const svg = document.getElementById('mapSvg');
+            
+            svg.innerHTML = wardData.map((ward, index) => {
+                let color;
+                let isReserved = ward.reservation !== 'General';
+                let extraClasses = '';
+                
+                if (currentView === 'reservation') {
+                    color = getColorForReservation(ward.reservation);
+                } else if (currentView === 'demographics') {
+                    color = getColorForDemographics(ward);
+                    if (isReserved) extraClasses = 'reserved';
+                } else {
+                    color = getColorForDistribution(ward);
+                }
+                
+                const path = generateWardPath(ward, index);
+                
+                return `
+                    <path 
+                        d="${path}" 
+                        fill="${color}" 
+                        class="ward ${selectedWard === ward.id ? 'selected' : ''} ${extraClasses}"
+                        data-ward-id="${ward.id}"
+                        onmouseover="showTooltip(event, ${ward.id})"
+                        onmousemove="moveTooltip(event)"
+                        onmouseout="hideTooltip()"
+                        onclick="selectWard(${ward.id})"
+                    />
+                `;
+            }).join('');
+        }
+
+        function setView(view) {
+            currentView = view;
+            
+            document.querySelectorAll('.view-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            updateLegend();
+            renderMap();
+        }
+
+        function showTooltip(event, wardId) {
+            const ward = wardData.find(w => w.id === wardId);
+            const tooltip = document.getElementById('tooltip');
+            const dominant = getDominantCategory(ward);
+            const diversity = (calculateDiversity(ward) * 100).toFixed(1);
+            
+            const reservationBadge = ward.reservation !== 'General' ? 
+                `<div class="reservation-badge" style="background-color: ${getColorForReservation(ward.reservation)}; color: white;">
+                    ${ward.reservation} Reserved
+                </div>` : '';
+            
+            document.getElementById('tooltipTitle').textContent = `Ward ${ward.id}: ${ward.name}`;
+            document.getElementById('tooltipContent').innerHTML = `
+                <div class="tooltip-stat">
+                    <span class="tooltip-label">Reservation:</span>
+                    <span class="tooltip-value">${ward.reservation}</span>
+                </div>
+                <div class="tooltip-stat">
+                    <span class="tooltip-label">Dominant Group:</span>
+                    <span class="tooltip-value">${dominant} (${ward[dominant.toLowerCase() + 'Pop']}%)</span>
+                </div>
+                <div class="tooltip-stat">
+                    <span class="tooltip-label">SC Population:</span>
+                    <span class="tooltip-value">${ward.scPop}%</span>
+                </div>
+                <div class="tooltip-stat">
+                    <span class="tooltip-label">ST Population:</span>
+                    <span class="tooltip-value">${ward.stPop}%</span>
+                </div>
+                <div class="tooltip-stat">
+                    <span class="tooltip-label">OBC Population:</span>
+                    <span class="tooltip-value">${ward.obcPop}%</span>
+                </div>
+                <div class="tooltip-stat">
+                    <span class="tooltip-label">General Population:</span>
+                    <span class="tooltip-value">${ward.generalPop}%</span>
+                </div>
+                <div class="tooltip-stat">
+                    <span class="tooltip-label">Diversity Index:</span>
+                    <span class="tooltip-value">${diversity}%</span>
+                </div>
+                ${reservationBadge}
+            `;
+            
+            tooltip.classList.add('visible');
+            moveTooltip(event);
+        }
+
+        function moveTooltip(event) {
+            const tooltip = document.getElementById('tooltip');
+            tooltip.style.left = (event.pageX + 15) + 'px';
+            tooltip.style.top = (event.pageY - 10) + 'px';
+        }
+
+        function hideTooltip() {
+            document.getElementById('tooltip').classList.remove('visible');
+        }
+
+        function selectWard(wardId) {
+            selectedWard = selectedWard === wardId ? null : wardId;
+            const ward = wardData.find(w => w.id === wardId);
+            
+            document.getElementById('selectedWard').textContent = 
+                selectedWard ? `${ward.name} (${ward.reservation})` : 'None';
+            
+            renderMap();
+        }
+
+        // Initialize the map
+        updateLegend();
+        renderMap();
+        
+        // Update statistics
+        const reservationCounts = wardData.reduce((acc, ward) => {
+            acc[ward.reservation] = (acc[ward.reservation] || 0) + 1;
+            return acc;
+        }, {});
+        
+        document.getElementById('totalWards').textContent = wardData.length;
+        document.getElementById('generalCount').textContent = reservationCounts['General'] || 0;
+        document.getElementById('scCount').textContent = reservationCounts['SC'] || 0;
+        document.getElementById('stCount').textContent = reservationCounts['ST'] || 0;
+        document.getElementById('obcCount').textContent = reservationCounts['OBC'] || 0;
+        document.getElementById('womenCount').textContent = reservationCounts['Women'] || 0;
+    </script>
+</body>
+</html>

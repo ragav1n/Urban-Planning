@@ -1,0 +1,1190 @@
+[
+  {
+    "ward_no": 2,
+    "ward_name": "Chowdeswari Ward",
+    "population": 19626,
+    "area_sqkm": 7.06
+  },
+  {
+    "ward_no": 3,
+    "ward_name": "Atturu",
+    "population": 24020,
+    "area_sqkm": 10.15
+  },
+  {
+    "ward_no": 4,
+    "ward_name": "Yelahanka Satellite Town",
+    "population": 25782,
+    "area_sqkm": 4.9
+  },
+  {
+    "ward_no": 51,
+    "ward_name": "Vijnanapura",
+    "population": 35087,
+    "area_sqkm": 2.05
+  },
+  {
+    "ward_no": 53,
+    "ward_name": "Basavanapura",
+    "population": 22012,
+    "area_sqkm": 6.28
+  },
+  {
+    "ward_no": 54,
+    "ward_name": "Hudi",
+    "population": 20700,
+    "area_sqkm": 15.3
+  },
+  {
+    "ward_no": 55,
+    "ward_name": "Devasandra",
+    "population": 22057,
+    "area_sqkm": 3.52
+  },
+  {
+    "ward_no": 56,
+    "ward_name": "A Narayanapura",
+    "population": 29420,
+    "area_sqkm": 2.15
+  },
+  {
+    "ward_no": 81,
+    "ward_name": "Vijnana Nagar",
+    "population": 24757,
+    "area_sqkm": 5.73
+  },
+  {
+    "ward_no": 87,
+    "ward_name": "HAL Airport",
+    "population": 33066,
+    "area_sqkm": 6.8
+  },
+  {
+    "ward_no": 10,
+    "ward_name": "Dodda Bommasandra",
+    "population": 21640,
+    "area_sqkm": 4.2
+  },
+  {
+    "ward_no": 11,
+    "ward_name": "Kuvempu Nagar",
+    "population": 25295,
+    "area_sqkm": 7.59
+  },
+  {
+    "ward_no": 5,
+    "ward_name": "Jakkuru",
+    "population": 20964,
+    "area_sqkm": 23.96
+  },
+  {
+    "ward_no": 6,
+    "ward_name": "Thanisandra",
+    "population": 20402,
+    "area_sqkm": 9.97
+  },
+  {
+    "ward_no": 7,
+    "ward_name": "Byatarayanapura",
+    "population": 31400,
+    "area_sqkm": 9.6
+  },
+  {
+    "ward_no": 8,
+    "ward_name": "Kodigehalli",
+    "population": 21635,
+    "area_sqkm": 3.81
+  },
+  {
+    "ward_no": 9,
+    "ward_name": "Vidyaranyapura",
+    "population": 23136,
+    "area_sqkm": 9.79
+  },
+  {
+    "ward_no": 130,
+    "ward_name": "Ullalu",
+    "population": 20332,
+    "area_sqkm": 8.92
+  },
+  {
+    "ward_no": 159,
+    "ward_name": "Kengeri",
+    "population": 24870,
+    "area_sqkm": 4.77
+  },
+  {
+    "ward_no": 40,
+    "ward_name": "Dodda Bidarakallu",
+    "population": 19349,
+    "area_sqkm": 12.7
+  },
+  {
+    "ward_no": 72,
+    "ward_name": "Herohalli",
+    "population": 19668,
+    "area_sqkm": 7.7
+  },
+  {
+    "ward_no": 16,
+    "ward_name": "Jalahalli",
+    "population": 29037,
+    "area_sqkm": 5.16
+  },
+  {
+    "ward_no": 160,
+    "ward_name": "Rajarajeshwari Nagar",
+    "population": 23282,
+    "area_sqkm": 11.35
+  },
+  {
+    "ward_no": 17,
+    "ward_name": "J P Park",
+    "population": 35174,
+    "area_sqkm": 2.05
+  },
+  {
+    "ward_no": 37,
+    "ward_name": "Yeshwanthpura",
+    "population": 35972,
+    "area_sqkm": 0.78
+  },
+  {
+    "ward_no": 38,
+    "ward_name": "HMT Ward",
+    "population": 29764,
+    "area_sqkm": 5.21
+  },
+  {
+    "ward_no": 42,
+    "ward_name": "Lakshmi Devi Nagar",
+    "population": 25578,
+    "area_sqkm": 1.33
+  },
+  {
+    "ward_no": 69,
+    "ward_name": "Laggere",
+    "population": 25370,
+    "area_sqkm": 1.58
+  },
+  {
+    "ward_no": 73,
+    "ward_name": "Kottegepalya",
+    "population": 29100,
+    "area_sqkm": 5.84
+  },
+  {
+    "ward_no": 12,
+    "ward_name": "Shettihalli",
+    "population": 28309,
+    "area_sqkm": 8.97
+  },
+  {
+    "ward_no": 13,
+    "ward_name": "Mallasandra",
+    "population": 26253,
+    "area_sqkm": 1.31
+  },
+  {
+    "ward_no": 14,
+    "ward_name": "Bagalakunte",
+    "population": 28306,
+    "area_sqkm": 4.43
+  },
+  {
+    "ward_no": 15,
+    "ward_name": "T Dasarahalli",
+    "population": 26050,
+    "area_sqkm": 0.88
+  },
+  {
+    "ward_no": 39,
+    "ward_name": "Chokkasandra",
+    "population": 30117,
+    "area_sqkm": 4.0
+  },
+  {
+    "ward_no": 41,
+    "ward_name": "Peenya Industrial Area",
+    "population": 27467,
+    "area_sqkm": 5.59
+  },
+  {
+    "ward_no": 70,
+    "ward_name": "Rajagopal Nagar",
+    "population": 28604,
+    "area_sqkm": 2.18
+  },
+  {
+    "ward_no": 71,
+    "ward_name": "Hegganahalli",
+    "population": 30889,
+    "area_sqkm": 1.96
+  },
+  {
+    "ward_no": 102,
+    "ward_name": "Vrisabhavathi Nagar",
+    "population": 34339,
+    "area_sqkm": 0.99
+  },
+  {
+    "ward_no": 43,
+    "ward_name": "Nandini Layout",
+    "population": 34318,
+    "area_sqkm": 1.41
+  },
+  {
+    "ward_no": 44,
+    "ward_name": "Marappana Palya",
+    "population": 34002,
+    "area_sqkm": 2.05
+  },
+  {
+    "ward_no": 67,
+    "ward_name": "Nagapura",
+    "population": 35553,
+    "area_sqkm": 1.79
+  },
+  {
+    "ward_no": 68,
+    "ward_name": "Mahalakshimpuram",
+    "population": 35976,
+    "area_sqkm": 0.95
+  },
+  {
+    "ward_no": 74,
+    "ward_name": "Shakthi Ganapathi Nagar",
+    "population": 34530,
+    "area_sqkm": 0.7
+  },
+  {
+    "ward_no": 75,
+    "ward_name": "Shankar Matt",
+    "population": 35679,
+    "area_sqkm": 1.08
+  },
+  {
+    "ward_no": 35,
+    "ward_name": "Aramane Nagara",
+    "population": 30397,
+    "area_sqkm": 7.47
+  },
+  {
+    "ward_no": 36,
+    "ward_name": "Mattikere",
+    "population": 35882,
+    "area_sqkm": 0.91
+  },
+  {
+    "ward_no": 45,
+    "ward_name": "Malleswaram",
+    "population": 36321,
+    "area_sqkm": 1.81
+  },
+  {
+    "ward_no": 64,
+    "ward_name": "Rajamahal Guttahalli",
+    "population": 33964,
+    "area_sqkm": 0.73
+  },
+  {
+    "ward_no": 65,
+    "ward_name": "Kadu Malleshwar Ward",
+    "population": 34053,
+    "area_sqkm": 1.36
+  },
+  {
+    "ward_no": 66,
+    "ward_name": "Subramanya Nagar",
+    "population": 34883,
+    "area_sqkm": 0.94
+  },
+  {
+    "ward_no": 76,
+    "ward_name": "Gayithri Nagar",
+    "population": 35389,
+    "area_sqkm": 0.64
+  },
+  {
+    "ward_no": 18,
+    "ward_name": "Radhakrishna Temple Ward",
+    "population": 26211,
+    "area_sqkm": 1.95
+  },
+  {
+    "ward_no": 19,
+    "ward_name": "Sanjaya Nagar",
+    "population": 24178,
+    "area_sqkm": 1.54
+  },
+  {
+    "ward_no": 20,
+    "ward_name": "Ganga Nagar",
+    "population": 26256,
+    "area_sqkm": 2.26
+  },
+  {
+    "ward_no": 21,
+    "ward_name": "Hebbala",
+    "population": 24161,
+    "area_sqkm": 1.23
+  },
+  {
+    "ward_no": 22,
+    "ward_name": "Vishwanath Nagenahalli",
+    "population": 25697,
+    "area_sqkm": 1.47
+  },
+  {
+    "ward_no": 33,
+    "ward_name": "Manorayanapalya",
+    "population": 34777,
+    "area_sqkm": 0.81
+  },
+  {
+    "ward_no": 34,
+    "ward_name": "Gangenahalli",
+    "population": 24954,
+    "area_sqkm": 1.09
+  },
+  {
+    "ward_no": 46,
+    "ward_name": "Jayachamarajendra Nagar",
+    "population": 30743,
+    "area_sqkm": 0.89
+  },
+  {
+    "ward_no": 31,
+    "ward_name": "Kushal Nagar",
+    "population": 34046,
+    "area_sqkm": 0.65
+  },
+  {
+    "ward_no": 32,
+    "ward_name": "Kaval Bairasandra",
+    "population": 26550,
+    "area_sqkm": 1.59
+  },
+  {
+    "ward_no": 47,
+    "ward_name": "Devara Jeevanahalli",
+    "population": 33483,
+    "area_sqkm": 1.37
+  },
+  {
+    "ward_no": 48,
+    "ward_name": "Muneshwara Nagar",
+    "population": 30508,
+    "area_sqkm": 0.48
+  },
+  {
+    "ward_no": 60,
+    "ward_name": "Sagayarapuram",
+    "population": 34874,
+    "area_sqkm": 0.77
+  },
+  {
+    "ward_no": 61,
+    "ward_name": "S K Garden",
+    "population": 33939,
+    "area_sqkm": 1.31
+  },
+  {
+    "ward_no": 78,
+    "ward_name": "Pulikeshinagar",
+    "population": 28149,
+    "area_sqkm": 1.72
+  },
+  {
+    "ward_no": 23,
+    "ward_name": "Nagavara",
+    "population": 35264,
+    "area_sqkm": 2.06
+  },
+  {
+    "ward_no": 24,
+    "ward_name": "HBR Layout",
+    "population": 32156,
+    "area_sqkm": 4.64
+  },
+  {
+    "ward_no": 27,
+    "ward_name": "Banasavadi",
+    "population": 31998,
+    "area_sqkm": 3.46
+  },
+  {
+    "ward_no": 28,
+    "ward_name": "Kammanahalli",
+    "population": 34819,
+    "area_sqkm": 1.03
+  },
+  {
+    "ward_no": 29,
+    "ward_name": "Kacharkanahalli",
+    "population": 29018,
+    "area_sqkm": 1.72
+  },
+  {
+    "ward_no": 30,
+    "ward_name": "Kadugondanahalli",
+    "population": 34842,
+    "area_sqkm": 0.71
+  },
+  {
+    "ward_no": 49,
+    "ward_name": "Lingarajapura",
+    "population": 32375,
+    "area_sqkm": 0.89
+  },
+  {
+    "ward_no": 59,
+    "ward_name": "Maruthi Seva Nagar",
+    "population": 35811,
+    "area_sqkm": 2.37
+  },
+  {
+    "ward_no": 113,
+    "ward_name": "Konena Agrahara",
+    "population": 29344,
+    "area_sqkm": 2.12
+  },
+  {
+    "ward_no": 50,
+    "ward_name": "Benniganahalli",
+    "population": 31985,
+    "area_sqkm": 4.92
+  },
+  {
+    "ward_no": 57,
+    "ward_name": "C V Raman Nagar",
+    "population": 29760,
+    "area_sqkm": 3.58
+  },
+  {
+    "ward_no": 58,
+    "ward_name": "New Tippasandara",
+    "population": 34577,
+    "area_sqkm": 3.34
+  },
+  {
+    "ward_no": 79,
+    "ward_name": "Sarvagna Nagar",
+    "population": 34943,
+    "area_sqkm": 3.66
+  },
+  {
+    "ward_no": 80,
+    "ward_name": "Hoysala Nagar",
+    "population": 35890,
+    "area_sqkm": 2.05
+  },
+  {
+    "ward_no": 88,
+    "ward_name": "Jeevanbhima Nagar",
+    "population": 36152,
+    "area_sqkm": 1.89
+  },
+  {
+    "ward_no": 110,
+    "ward_name": "Sampangiram Nagar",
+    "population": 33120,
+    "area_sqkm": 4.45
+  },
+  {
+    "ward_no": 62,
+    "ward_name": "Ramaswamy Palya",
+    "population": 32400,
+    "area_sqkm": 0.83
+  },
+  {
+    "ward_no": 63,
+    "ward_name": "Jayamahal",
+    "population": 24065,
+    "area_sqkm": 1.44
+  },
+  {
+    "ward_no": 90,
+    "ward_name": "Halsoor",
+    "population": 35891,
+    "area_sqkm": 1.68
+  },
+  {
+    "ward_no": 91,
+    "ward_name": "Bharathi Nagar",
+    "population": 32632,
+    "area_sqkm": 0.78
+  },
+  {
+    "ward_no": 92,
+    "ward_name": "Shivaji Nagar",
+    "population": 35740,
+    "area_sqkm": 0.43
+  },
+  {
+    "ward_no": 93,
+    "ward_name": "Vasanth Nagar",
+    "population": 25632,
+    "area_sqkm": 3.12
+  },
+  {
+    "ward_no": 111,
+    "ward_name": "Shantala Nagar",
+    "population": 30225,
+    "area_sqkm": 3.99
+  },
+  {
+    "ward_no": 112,
+    "ward_name": "Domlur",
+    "population": 34703,
+    "area_sqkm": 1.75
+  },
+  {
+    "ward_no": 114,
+    "ward_name": "Agaram",
+    "population": 35632,
+    "area_sqkm": 11.26
+  },
+  {
+    "ward_no": 115,
+    "ward_name": "Vannarpet",
+    "population": 35532,
+    "area_sqkm": 0.74
+  },
+  {
+    "ward_no": 116,
+    "ward_name": "Nilasandra",
+    "population": 36279,
+    "area_sqkm": 0.54
+  },
+  {
+    "ward_no": 117,
+    "ward_name": "Shanthi Nagar",
+    "population": 36426,
+    "area_sqkm": 2.7
+  },
+  {
+    "ward_no": 89,
+    "ward_name": "Jogupalya",
+    "population": 34611,
+    "area_sqkm": 0.91
+  },
+  {
+    "ward_no": 109,
+    "ward_name": "Chickpete",
+    "population": 33698,
+    "area_sqkm": 0.71
+  },
+  {
+    "ward_no": 120,
+    "ward_name": "Cottonpete",
+    "population": 36582,
+    "area_sqkm": 0.76
+  },
+  {
+    "ward_no": 121,
+    "ward_name": "Binnipete",
+    "population": 33946,
+    "area_sqkm": 0.77
+  },
+  {
+    "ward_no": 77,
+    "ward_name": "Dattatreya Temple",
+    "population": 34236,
+    "area_sqkm": 0.71
+  },
+  {
+    "ward_no": 94,
+    "ward_name": "Gandhinagar",
+    "population": 35310,
+    "area_sqkm": 1.93
+  },
+  {
+    "ward_no": 95,
+    "ward_name": "Subhash Nagar",
+    "population": 35427,
+    "area_sqkm": 1.32
+  },
+  {
+    "ward_no": 96,
+    "ward_name": "Okalipuram",
+    "population": 35875,
+    "area_sqkm": 0.83
+  },
+  {
+    "ward_no": 100,
+    "ward_name": "Basaveshwara Nagar",
+    "population": 27002,
+    "area_sqkm": 0.84
+  },
+  {
+    "ward_no": 101,
+    "ward_name": "Kamakshipalya",
+    "population": 25742,
+    "area_sqkm": 0.91
+  },
+  {
+    "ward_no": 107,
+    "ward_name": "Shivanagara",
+    "population": 35979,
+    "area_sqkm": 0.78
+  },
+  {
+    "ward_no": 108,
+    "ward_name": "Sriramamandir",
+    "population": 33613,
+    "area_sqkm": 1.06
+  },
+  {
+    "ward_no": 97,
+    "ward_name": "Dayananda Nagar",
+    "population": 34595,
+    "area_sqkm": 0.45
+  },
+  {
+    "ward_no": 98,
+    "ward_name": "Prakash Nagar",
+    "population": 35465,
+    "area_sqkm": 0.56
+  },
+  {
+    "ward_no": 99,
+    "ward_name": "Rajaji Nagar",
+    "population": 33231,
+    "area_sqkm": 0.86
+  },
+  {
+    "ward_no": 103,
+    "ward_name": "Kaveripura",
+    "population": 35256,
+    "area_sqkm": 1.64
+  },
+  {
+    "ward_no": 104,
+    "ward_name": "Govindaraja Nagar",
+    "population": 25773,
+    "area_sqkm": 0.77
+  },
+  {
+    "ward_no": 105,
+    "ward_name": "Agrahara Dasarahalli",
+    "population": 26857,
+    "area_sqkm": 0.8
+  },
+  {
+    "ward_no": 106,
+    "ward_name": "Dr. Raj Kumar Ward",
+    "population": 24752,
+    "area_sqkm": 0.99
+  },
+  {
+    "ward_no": 125,
+    "ward_name": "Marenahalli",
+    "population": 20068,
+    "area_sqkm": 0.69
+  },
+  {
+    "ward_no": 126,
+    "ward_name": "Maruthi Mandir ward",
+    "population": 21784,
+    "area_sqkm": 0.79
+  },
+  {
+    "ward_no": 127,
+    "ward_name": "Mudalapalya",
+    "population": 24487,
+    "area_sqkm": 0.98
+  },
+  {
+    "ward_no": 128,
+    "ward_name": "Nagarabhavi",
+    "population": 20269,
+    "area_sqkm": 1.6
+  },
+  {
+    "ward_no": 131,
+    "ward_name": "Nayandahalli",
+    "population": 22878,
+    "area_sqkm": 2.07
+  },
+  {
+    "ward_no": 122,
+    "ward_name": "Kempapura Agrahara",
+    "population": 33736,
+    "area_sqkm": 0.36
+  },
+  {
+    "ward_no": 123,
+    "ward_name": "Vijayanagar",
+    "population": 36077,
+    "area_sqkm": 0.73
+  },
+  {
+    "ward_no": 124,
+    "ward_name": "Hosahalli",
+    "population": 32103,
+    "area_sqkm": 0.89
+  },
+  {
+    "ward_no": 132,
+    "ward_name": "Attiguppe",
+    "population": 26806,
+    "area_sqkm": 1.39
+  },
+  {
+    "ward_no": 133,
+    "ward_name": "Hampi Nagar",
+    "population": 30355,
+    "area_sqkm": 1.11
+  },
+  {
+    "ward_no": 134,
+    "ward_name": "Bapuji Nagar",
+    "population": 36234,
+    "area_sqkm": 0.68
+  },
+  {
+    "ward_no": 157,
+    "ward_name": "Gali Anjenaya Temple ward",
+    "population": 27264,
+    "area_sqkm": 1.14
+  },
+  {
+    "ward_no": 158,
+    "ward_name": "Deepanjali Nagar",
+    "population": 30924,
+    "area_sqkm": 2.09
+  },
+  {
+    "ward_no": 135,
+    "ward_name": "Padarayanapura",
+    "population": 35213,
+    "area_sqkm": 0.31
+  },
+  {
+    "ward_no": 136,
+    "ward_name": "Jagajivanaramnagar",
+    "population": 33758,
+    "area_sqkm": 0.63
+  },
+  {
+    "ward_no": 137,
+    "ward_name": "Rayapuram",
+    "population": 32949,
+    "area_sqkm": 0.45
+  },
+  {
+    "ward_no": 138,
+    "ward_name": "Chalavadipalya",
+    "population": 25319,
+    "area_sqkm": 0.4
+  },
+  {
+    "ward_no": 139,
+    "ward_name": "K R Market",
+    "population": 28514,
+    "area_sqkm": 0.81
+  },
+  {
+    "ward_no": 140,
+    "ward_name": "Chamrajapet",
+    "population": 33398,
+    "area_sqkm": 1.03
+  },
+  {
+    "ward_no": 141,
+    "ward_name": "Azad Nagar",
+    "population": 35741,
+    "area_sqkm": 0.67
+  },
+  {
+    "ward_no": 118,
+    "ward_name": "Sudham Nagara",
+    "population": 32202,
+    "area_sqkm": 1.01
+  },
+  {
+    "ward_no": 119,
+    "ward_name": "Dharmaraya Swamy Temple",
+    "population": 33199,
+    "area_sqkm": 1.1
+  },
+  {
+    "ward_no": 142,
+    "ward_name": "Sunkenahalli",
+    "population": 36158,
+    "area_sqkm": 1.49
+  },
+  {
+    "ward_no": 143,
+    "ward_name": "Vishveshwara Puram",
+    "population": 36093,
+    "area_sqkm": 2.47
+  },
+  {
+    "ward_no": 144,
+    "ward_name": "Siddapura",
+    "population": 32194,
+    "area_sqkm": 0.66
+  },
+  {
+    "ward_no": 145,
+    "ward_name": "Hombegowda Nagara",
+    "population": 36455,
+    "area_sqkm": 1.41
+  },
+  {
+    "ward_no": 153,
+    "ward_name": "Jayanagar",
+    "population": 35963,
+    "area_sqkm": 2.5
+  },
+  {
+    "ward_no": 155,
+    "ward_name": "Hanumanth Nagar",
+    "population": 35065,
+    "area_sqkm": 0.99
+  },
+  {
+    "ward_no": 156,
+    "ward_name": "Srinagar",
+    "population": 36045,
+    "area_sqkm": 0.8
+  },
+  {
+    "ward_no": 154,
+    "ward_name": "Basavanagudi",
+    "population": 36015,
+    "area_sqkm": 1.17
+  },
+  {
+    "ward_no": 162,
+    "ward_name": "Girinagar",
+    "population": 34912,
+    "area_sqkm": 1.77
+  },
+  {
+    "ward_no": 163,
+    "ward_name": "Katriguppe",
+    "population": 35736,
+    "area_sqkm": 1.11
+  },
+  {
+    "ward_no": 164,
+    "ward_name": "Vidyapeeta ward",
+    "population": 34535,
+    "area_sqkm": 34535.0
+  },
+  {
+    "ward_no": 161,
+    "ward_name": "Hosakerehalli",
+    "population": 21185,
+    "area_sqkm": 1.34
+  },
+  {
+    "ward_no": 165,
+    "ward_name": "Ganesh Mandir ward",
+    "population": 23101,
+    "area_sqkm": 1.63
+  },
+  {
+    "ward_no": 166,
+    "ward_name": "Karisandra",
+    "population": 30206,
+    "area_sqkm": 1.1
+  },
+  {
+    "ward_no": 167,
+    "ward_name": "Yediyur",
+    "population": 34591,
+    "area_sqkm": 1.23
+  },
+  {
+    "ward_no": 180,
+    "ward_name": "Banashankari Temple ward",
+    "population": 34022,
+    "area_sqkm": 0.68
+  },
+  {
+    "ward_no": 181,
+    "ward_name": "Kumaraswamy Layout",
+    "population": 35384,
+    "area_sqkm": 1.87
+  },
+  {
+    "ward_no": 182,
+    "ward_name": "Padmanabha Nagar",
+    "population": 25454,
+    "area_sqkm": 1.68
+  },
+  {
+    "ward_no": 146,
+    "ward_name": "Lakkasandra",
+    "population": 28303,
+    "area_sqkm": 1.29
+  },
+  {
+    "ward_no": 147,
+    "ward_name": "Adugodi",
+    "population": 29945,
+    "area_sqkm": 1.6
+  },
+  {
+    "ward_no": 148,
+    "ward_name": "Ejipura",
+    "population": 29105,
+    "area_sqkm": 1.61
+  },
+  {
+    "ward_no": 151,
+    "ward_name": "Koramangala",
+    "population": 35359,
+    "area_sqkm": 3.71
+  },
+  {
+    "ward_no": 152,
+    "ward_name": "Suddagunte Palya",
+    "population": 35910,
+    "area_sqkm": 1.74
+  },
+  {
+    "ward_no": 178,
+    "ward_name": "Sarakki",
+    "population": 26707,
+    "area_sqkm": 1.34
+  },
+  {
+    "ward_no": 173,
+    "ward_name": "Jakkasandra",
+    "population": 24088,
+    "area_sqkm": 1.52
+  },
+  {
+    "ward_no": 176,
+    "ward_name": "BTM Layout",
+    "population": 34436,
+    "area_sqkm": 2.13
+  },
+  {
+    "ward_no": 168,
+    "ward_name": "Pattabhiram Nagar",
+    "population": 30989,
+    "area_sqkm": 1.75
+  },
+  {
+    "ward_no": 169,
+    "ward_name": "Byrasandra",
+    "population": 30638,
+    "area_sqkm": 0.87
+  },
+  {
+    "ward_no": 179,
+    "ward_name": "Shakambari Nagar",
+    "population": 23239,
+    "area_sqkm": 1.85
+  },
+  {
+    "ward_no": 149,
+    "ward_name": "Varthuru",
+    "population": 25067,
+    "area_sqkm": 26.98
+  },
+  {
+    "ward_no": 150,
+    "ward_name": "Bellanduru",
+    "population": 20526,
+    "area_sqkm": 26.37
+  },
+  {
+    "ward_no": 82,
+    "ward_name": "Garudachar Playa",
+    "population": 20920,
+    "area_sqkm": 6.8
+  },
+  {
+    "ward_no": 83,
+    "ward_name": "Kadugodi",
+    "population": 22205,
+    "area_sqkm": 11.88
+  },
+  {
+    "ward_no": 84,
+    "ward_name": "Hagadur",
+    "population": 25915,
+    "area_sqkm": 12.68
+  },
+  {
+    "ward_no": 85,
+    "ward_name": "Dodda Nekkundi",
+    "population": 22016,
+    "area_sqkm": 12.12
+  },
+  {
+    "ward_no": 174,
+    "ward_name": "HSR Layout",
+    "population": 24749,
+    "area_sqkm": 6.98
+  },
+  {
+    "ward_no": 175,
+    "ward_name": "Bommanahalli",
+    "population": 24307,
+    "area_sqkm": 1.85
+  },
+  {
+    "ward_no": 186,
+    "ward_name": "Jaraganahalli",
+    "population": 23299,
+    "area_sqkm": 1.28
+  },
+  {
+    "ward_no": 187,
+    "ward_name": "Puttenahalli",
+    "population": 20544,
+    "area_sqkm": 2.87
+  },
+  {
+    "ward_no": 188,
+    "ward_name": "Bilekhalli",
+    "population": 22510,
+    "area_sqkm": 4.24
+  },
+  {
+    "ward_no": 189,
+    "ward_name": "Hongasandra",
+    "population": 23058,
+    "area_sqkm": 2.16
+  },
+  {
+    "ward_no": 190,
+    "ward_name": "Mangammanapalya",
+    "population": 27391,
+    "area_sqkm": 3.52
+  },
+  {
+    "ward_no": 191,
+    "ward_name": "Singasandra",
+    "population": 21410,
+    "area_sqkm": 9.42
+  },
+  {
+    "ward_no": 193,
+    "ward_name": "Arakere",
+    "population": 25003,
+    "area_sqkm": 6.45
+  },
+  {
+    "ward_no": 184,
+    "ward_name": "Uttarahalli",
+    "population": 21845,
+    "area_sqkm": 8.99
+  },
+  {
+    "ward_no": 185,
+    "ward_name": "Yelchenahalli",
+    "population": 28000,
+    "area_sqkm": 1.58
+  },
+  {
+    "ward_no": 192,
+    "ward_name": "Begur",
+    "population": 19287,
+    "area_sqkm": 18.8
+  },
+  {
+    "ward_no": 194,
+    "ward_name": "Gottigere",
+    "population": 21526,
+    "area_sqkm": 6.49
+  },
+  {
+    "ward_no": 195,
+    "ward_name": "Konankunte",
+    "population": 20181,
+    "area_sqkm": 3.42
+  },
+  {
+    "ward_no": 196,
+    "ward_name": "Anjanapura",
+    "population": 21080,
+    "area_sqkm": 11.92
+  },
+  {
+    "ward_no": 1,
+    "ward_name": "Kempegowda Ward",
+    "population": 21866,
+    "area_sqkm": 10.47
+  },
+  {
+    "ward_no": 52,
+    "ward_name": "K R Puram",
+    "population": 26485,
+    "area_sqkm": 5.12
+  },
+  {
+    "ward_no": 129,
+    "ward_name": "Jnana Bharathi ward",
+    "population": 25889,
+    "area_sqkm": 12.19
+  },
+  {
+    "ward_no": 170,
+    "ward_name": "Jayanagar East",
+    "population": 30846,
+    "area_sqkm": 1.01
+  },
+  {
+    "ward_no": 171,
+    "ward_name": "Gurappanapalya",
+    "population": 35828,
+    "area_sqkm": 0.68
+  },
+  {
+    "ward_no": 183,
+    "ward_name": "Chikkalsandra",
+    "population": 24677,
+    "area_sqkm": 1.09
+  },
+  {
+    "ward_no": 197,
+    "ward_name": "Vasanthpura",
+    "population": 24522,
+    "area_sqkm": 5.34
+  },
+  {
+    "ward_no": 177,
+    "ward_name": "J P Nagar",
+    "population": 28508,
+    "area_sqkm": 1.79
+  },
+  {
+    "ward_no": 172,
+    "ward_name": "Madivala",
+    "population": 35155,
+    "area_sqkm": 1.16
+  },
+  {
+    "ward_no": 26,
+    "ward_name": "Ramamurthy Nagar",
+    "population": 21999,
+    "area_sqkm": 7.87
+  },
+  {
+    "ward_no": 25,
+    "ward_name": "Horamavu",
+    "population": 28167,
+    "area_sqkm": 17.32
+  },
+  {
+    "ward_no": 86,
+    "ward_name": "Marathahalli",
+    "population": 22489,
+    "area_sqkm": 3.1
+  },
+  {
+    "ward_no": 198,
+    "ward_name": "Hemmigepura",
+    "population": 24311,
+    "area_sqkm": 28.59
+  }
+]
