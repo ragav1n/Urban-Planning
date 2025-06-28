@@ -46,20 +46,20 @@ This is an integrated, intelligent platform for **urban regulation compliance**,
 ---
 
 ### 4️⃣ **Slum Redevelopment Analysis**
-🎯 **Purpose**: Provides data-driven insights for systematic slum redevelopment planning and community rehabilitation strategies.
-📊 **Features**:
-    - Interactive ward-wise slum mapping with population density visualization
-    - AI-powered redevelopment feasibility analysis and cost estimation
-    - Community engagement tools and grievance tracking
-    - Progress monitoring with real-time project dashboards
-🔧 **How It Works**:
-    - Analyzes demographic and infrastructure data for targeted slum areas
-    - Generates redevelopment recommendations based on community needs
-    - Provides compliance checking against government housing schemes
-    - Offers mobile-responsive interface for field workers and residents
-📈 **Outputs**:
-    - Comprehensive redevelopment reports with timeline and budget estimates
-    - Community impact assessments and stakeholder engagement metrics
+- 🎯 **Purpose**: Provides data-driven insights for systematic slum redevelopment planning and community rehabilitation strategies.
+- 📊 **Features**:
+  - Interactive ward-wise slum mapping with population density visualization
+  - AI-powered redevelopment feasibility analysis and cost estimation
+  - Community engagement tools and grievance tracking
+  - Progress monitoring with real-time project dashboards
+- 🔧 **How It Works**:
+  - Analyzes demographic and infrastructure data for targeted slum areas
+  - Generates redevelopment recommendations based on community needs
+  - Provides compliance checking against government housing schemes
+  - Offers mobile-responsive interface for field workers and residents
+- 📈 **Outputs**:
+  - Comprehensive redevelopment reports with timeline and budget estimates
+  - Community impact assessments and stakeholder engagement metrics
 
 ### 5️⃣ **User-Facing Web Application**
 - 🖥️ Built using **Next.js 14 + TypeScript**
